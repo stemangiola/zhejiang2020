@@ -51,7 +51,8 @@ Imports:
     SummarizedExperiment,
     SingleCellExperiment,
     igraph,
-    e1071
+    Glimma,
+    Mus.musculus
 Suggests:
     knitr,
     rmarkdown,

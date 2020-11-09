@@ -52,7 +52,11 @@ Imports:
     SingleCellExperiment,
     igraph,
     Glimma,
-    Mus.musculus
+    Mus.musculus,
+    gplots,
+    RColorBrewer,
+    R.utils,
+    RNAseq123
 Suggests:
     knitr,
     rmarkdown,

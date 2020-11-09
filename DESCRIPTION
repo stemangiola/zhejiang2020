@@ -62,4 +62,4 @@ biocViews: RNASeq, DifferentialExpression, GeneExpression, Normalization, Cluste
 URL: https://stemangiola.github.io/zhejiang2020/
 BugReports: https://github.com/stemangiola/zhejiang2020/issues/new/choose
 VignetteBuilder: knitr
-DockerImage: stemangiola/zhejiang2020:biocasia2020
+DockerImage: stemangiola/zhejiang2020:zhejiang2020

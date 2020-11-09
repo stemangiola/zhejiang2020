@@ -4,7 +4,7 @@
 
 # Introduction to Tidy Transcriptomics
 <p float="left">
-<img height="100" alt="biocasia2020" src="man/figures/biocasia_logo.png"/> 
+<img height="100" alt="zhejiang2020" src="man/figures/biocasia_logo.png"/> 
 <img height="100" alt="tidybulk" src="https://github.com/Bioconductor/BiocStickers/blob/master/tidybulk/tidybulk.png?raw=true"/>
 </p>
 
@@ -17,7 +17,7 @@
 
 Material [web page](https://stemangiola.github.io/zhejiang2020/articles/tidytranscriptomics.html).
 
-This material was created for the [BioC Asia 2020 conference](https://biocasia2020.bioconductor.org/) workshop but it can also be used for self-learning.
+This material was created for the [Zhejiang 2020 workshop](https://zhejiang2020.bioconductor.org/) workshop but it can also be used for self-learning.
 
 More details on the workshop are below.
 
@@ -30,7 +30,7 @@ This is necessary in order to reproduce the code shown in the workshop. The work
 If you're familiar with [Docker](https://docs.docker.com/get-docker/) you could use the Docker image which has all the software pre-configured to the correct versions.
 
 ```
-docker run -e PASSWORD=abc -p 8787:8787 stemangiola/zhejiang2020:biocasia2020
+docker run -e PASSWORD=abc -p 8787:8787 stemangiola/zhejiang2020:zhejiang2020
 ```
 
 Once running, navigate to <http://localhost:8787/> and then login with

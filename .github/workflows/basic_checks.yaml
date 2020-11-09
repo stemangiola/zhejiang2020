@@ -10,9 +10,6 @@ jobs:
         run: |
           install.packages('remotes')
           
-          # We'll install the specific versions from the install instructions
-          BiocManager::install("stemangiola/tidyHeatmap@v1.1.5", version="devel")
-          
           # Then install the other dependencies in the usual way
           options(repos = c(CRAN = 'https://cran.r-project.org'))
           BiocManager::install(ask=FALSE)

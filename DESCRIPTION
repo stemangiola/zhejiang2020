@@ -1,6 +1,6 @@
 Package: zhejiang2020
 Title: Introduction to Tidy Transcriptomics
-Version: 1.1.1
+Version: 0.1.1
 Authors@R: c(
     person("Maria", "Doyle", email="maria.doyle@petermac.org",
     role = c("aut"),
@@ -16,7 +16,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends:
-    R (>= 4.0.0)
+    R (>= 4.1.0)
 Imports:
     tidybulk,
     tidySingleCellExperiment,

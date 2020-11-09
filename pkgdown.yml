@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   vignette_template: vignette_template.html
-last_built: 2020-11-09T06:41Z
+last_built: 2020-11-09T06:45Z
 urls:
   reference: https://stemangiola.github.io/zhejiang2020/reference
   article: https://stemangiola.github.io/zhejiang2020/articles

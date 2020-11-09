@@ -45,7 +45,7 @@ Alternatively, you could install the workshop using the commands below in R `4.0
 ```
 # Install same versions used in the workshop
 #install.packages('remotes')
-remotes::install_github(c("stemangiola/tidybulk@v1.1.8", "stemangiola/tidySCE@v0.99.2", "stemangiola/tidyHeatmap@v1.1.5"))
+remotes::install_github(c("stemangiola/tidybulk@v1.1.8", "stemangiola/tidySingleCellExperiment@v0.99.2", "stemangiola/tidyHeatmap@v1.1.5"))
 
 # Install workshop package
 remotes::install_github("stemangiola/zhejiang2020", build_vignettes = TRUE)
@@ -61,7 +61,7 @@ To run the code, you could then copy and paste the code from the workshop vignet
 
 This workshop will present how to perform analysis of RNA sequencing count data following the tidy data paradigm. The tidy data paradigm provides a standard way to organise data values within a dataset, where each variable is a column, each observation is a row, and data is manipulated using an easy-to-understand vocabulary. Most importantly, the data structure remains consistent across manipulation and analysis functions.
 
-This can be achieved for RNA sequencing count data with the [tidybulk](https://stemangiola.github.io/tidybulk/), [tidySCE](https://stemangiola.github.io/tidySCE/),  [tidyHeatmap](https://stemangiola.github.io/tidyHeatmap/) and [tidyverse](https://www.tidyverse.org/) packages. The tidybulk package provides a tidy data structure and a modular framework for bulk transcriptional analyses, the tidySCE package provides similar for single-cell transcriptional analyses, and tidyHeatmap provides a tidy implementation of ComplexHeatmap. These packages are part of the tidytranscriptomics suite that introduces a tidy approach to RNA sequencing data.
+This can be achieved for RNA sequencing count data with the [tidybulk](https://stemangiola.github.io/tidybulk/), [tidySingleCellExperiment](https://stemangiola.github.io/tidySingleCellExperiment/),  [tidyHeatmap](https://stemangiola.github.io/tidyHeatmap/) and [tidyverse](https://www.tidyverse.org/) packages. The tidybulk package provides a tidy data structure and a modular framework for bulk transcriptional analyses, the tidySingleCellExperiment package provides similar for single-cell transcriptional analyses, and tidyHeatmap provides a tidy implementation of ComplexHeatmap. These packages are part of the tidytranscriptomics suite that introduces a tidy approach to RNA sequencing data.
 
 ### Pre-requisites
 
@@ -79,7 +79,7 @@ The workshop format is a 55 min session consisting of hands-on demos with Q&A.
 
 * tidyverse
 * tidybulk
-* tidySCE
+* tidySingleCellExperiment
 * tidyHeatmap
 * limma
 * edgeR
@@ -105,7 +105,7 @@ Rough guide
 | Activity                                              | Time |
 |-------------------------------------------------------|------|
 | Part 1 Bulk RNA-seq with tidybulk                     | 25m  |
-| Part 2 Single-cell RNA-seq with tidySCE               | 30m  |
+| Part 2 Single-cell RNA-seq with tidySingleCellExperiment               | 30m  |
 | Total                                                 | 55m  |
 
 ### Workshop goals and objectives
@@ -117,7 +117,7 @@ The tidytranscriptomics approach to RNA sequencing data analysis abstracts out t
 #### Learning goals
 
 * To understand the key concepts and steps of RNA sequencing count data analysis
-* To approach data representation and analysis though a tidy data paradigm, integrating tidyverse with tidybulk, tidySCE and tidyHeatmap.
+* To approach data representation and analysis though a tidy data paradigm, integrating tidyverse with tidybulk, tidySingleCellExperiment and tidyHeatmap.
 
 #### Learning objectives
 

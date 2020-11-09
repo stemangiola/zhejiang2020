@@ -84,7 +84,7 @@ custom_theme <-
 
 
 ```{poll class.source="poll"}
-Poll: What would be your preferred name for the package currently called tidySCE?
+Poll: What would be your preferred name for the package currently called tidySingleCellExperiment?
 ```
 
 

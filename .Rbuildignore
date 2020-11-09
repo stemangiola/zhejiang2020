@@ -9,6 +9,6 @@ _pkgdown.yml
 ^data-raw$
 dev$
 CONTRIBUTING.md
-^biocasia2020tidytranscriptomics\.Rcheck$
-^biocasia2020tidytranscriptomics.*\.tar\.gz$
-^biocasia2020tidytranscriptomics.*\.tgz$
+^zhejiang2020\.Rcheck$
+^zhejiang2020.*\.tar\.gz$
+^zhejiang2020.*\.tgz$

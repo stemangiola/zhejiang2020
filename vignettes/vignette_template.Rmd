@@ -4,7 +4,7 @@ author:
   - Maria Doyle, Peter MacCallum Cancer Centre^[<maria.doyle at petermac.org>]
   - Stefano Mangiola, Walter and Eliza Hall Institute^[<mangiola.s at wehi.edu.au>]
 output: rmarkdown::html_vignette
-bibliography: "`r file.path(system.file(package='biocasia2020tidytranscriptomics', 'vignettes'), 'tidytranscriptomics.bib')`"
+bibliography: "`r file.path(system.file(package='zhejiang2020', 'vignettes'), 'tidytranscriptomics.bib')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to Tidy Transcriptomics}
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,6 +27,10 @@ background-color: #fff4d4;
 .poll code {
 	background-color: #fff4d4;
 }
+```
+
+```{r}
+library(ggplot2)
 ```
 
 # Part 1 Bulk RNA-seq Core
@@ -85,7 +89,7 @@ Poll: What would be your preferred name for the package currently called tidySCE
 
 
 # Contributing
-If you want to suggest improvements for this workshop or ask questions, you can do so as described [here](https://github.com/stemangiola/biocasia2020_tidytranscriptomics/blob/master/CONTRIBUTING.md).
+If you want to suggest improvements for this workshop or ask questions, you can do so as described [here](https://github.com/stemangiola/zhejiang2020/blob/master/CONTRIBUTING.md).
 
 # Reproducibility
 Record package and version information with `sessionInfo`

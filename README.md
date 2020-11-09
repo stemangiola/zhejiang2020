@@ -1,5 +1,5 @@
 <!-- badges: start -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4087926.svg)](https://doi.org/10.5281/zenodo.4087926) [![.github/workflows/basic_checks.yaml](https://github.com/stemangiola/biocasia2020_tidytranscriptomics/workflows/.github/workflows/basic_checks.yaml/badge.svg)](https://github.com/stemangiola/biocasia2020_tidytranscriptomics/actions) [![Docker](https://github.com/Bioconductor/BioC2020/raw/master/docs/images/docker_icon.png)](https://hub.docker.com/repository/docker/stemangiola/biocasia2020_tidytranscriptomics) 	
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4087926.svg)](https://doi.org/10.5281/zenodo.4087926) [![.github/workflows/basic_checks.yaml](https://github.com/stemangiola/zhejiang2020/workflows/.github/workflows/basic_checks.yaml/badge.svg)](https://github.com/stemangiola/zhejiang2020/actions) [![Docker](https://github.com/Bioconductor/BioC2020/raw/master/docs/images/docker_icon.png)](https://hub.docker.com/repository/docker/stemangiola/zhejiang2020) 	
 <!-- badges: end -->
 
 # Introduction to Tidy Transcriptomics
@@ -15,7 +15,7 @@
 
 ## Syllabus
 
-Material [web page](https://stemangiola.github.io/biocasia2020_tidytranscriptomics/articles/tidytranscriptomics.html).
+Material [web page](https://stemangiola.github.io/zhejiang2020/articles/tidytranscriptomics.html).
 
 This material was created for the [BioC Asia 2020 conference](https://biocasia2020.bioconductor.org/) workshop but it can also be used for self-learning.
 
@@ -30,7 +30,7 @@ This is necessary in order to reproduce the code shown in the workshop. The work
 If you're familiar with [Docker](https://docs.docker.com/get-docker/) you could use the Docker image which has all the software pre-configured to the correct versions.
 
 ```
-docker run -e PASSWORD=abc -p 8787:8787 stemangiola/biocasia2020_tidytranscriptomics:biocasia2020
+docker run -e PASSWORD=abc -p 8787:8787 stemangiola/zhejiang2020:biocasia2020
 ```
 
 Once running, navigate to <http://localhost:8787/> and then login with
@@ -48,14 +48,14 @@ Alternatively, you could install the workshop using the commands below in R `4.0
 remotes::install_github(c("stemangiola/tidybulk@v1.1.8", "stemangiola/tidySCE@v0.99.2", "stemangiola/tidyHeatmap@v1.1.5"))
 
 # Install workshop package
-remotes::install_github("stemangiola/biocasia2020_tidytranscriptomics", build_vignettes = TRUE)
+remotes::install_github("stemangiola/zhejiang2020", build_vignettes = TRUE)
 
 # To view vignettes
-library(biocasia2020tidytranscriptomics)
-browseVignettes("biocasia2020tidytranscriptomics")
+library(zhejiang2020)
+browseVignettes("zhejiang2020")
 ```
 
-To run the code, you could then copy and paste the code from the workshop vignette or [R markdown file](https://raw.githubusercontent.com/stemangiola/biocasia2020_tidytranscriptomics/master/vignettes/tidytranscriptomics.Rmd) into a new R Markdown file on your computer.
+To run the code, you could then copy and paste the code from the workshop vignette or [R markdown file](https://raw.githubusercontent.com/stemangiola/zhejiang2020/master/vignettes/tidytranscriptomics.Rmd) into a new R Markdown file on your computer.
 
 ## Workshop Description
 

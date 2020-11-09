@@ -1,4 +1,4 @@
-Package: biocasia2020tidytranscriptomics
+Package: zhejiang2020
 Title: Introduction to Tidy Transcriptomics
 Version: 1.1.1
 Authors@R: c(
@@ -59,7 +59,7 @@ Suggests:
     pkgdown
 Biarch: true
 biocViews: RNASeq, DifferentialExpression, GeneExpression, Normalization, Clustering, QualityControl, Sequencing, SingleCell, Transcription, Transcriptomics
-URL: https://stemangiola.github.io/biocasia2020_tidytranscriptomics/
-BugReports: https://github.com/stemangiola/biocasia2020_tidytranscriptomics/issues/new/choose
+URL: https://stemangiola.github.io/zhejiang2020/
+BugReports: https://github.com/stemangiola/zhejiang2020/issues/new/choose
 VignetteBuilder: knitr
-DockerImage: stemangiola/biocasia2020_tidytranscriptomics:biocasia2020
+DockerImage: stemangiola/zhejiang2020:biocasia2020

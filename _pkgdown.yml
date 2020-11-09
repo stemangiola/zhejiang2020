@@ -1,4 +1,4 @@
-url: https://stemangiola.github.io/biocasia2020_tidytranscriptomics
+url: https://stemangiola.github.io/zhejiang2020
 
 template:
   params:
@@ -20,7 +20,7 @@ navbar:
 
   right:
    - icon: fa-github
-     href: https://github.com/stemangiola/biocasia2020_tidytranscriptomics
+     href: https://github.com/stemangiola/zhejiang2020
    - icon: fa-docker
-     href: https://hub.docker.com/repository/docker/stemangiola/biocasia2020_tidytranscriptomics
+     href: https://hub.docker.com/repository/docker/stemangiola/zhejiang2020
     

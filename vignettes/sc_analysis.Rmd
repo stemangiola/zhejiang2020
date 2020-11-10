@@ -53,11 +53,11 @@ The following R/Bioconductor packages will be explicitly used:
 
 ```{r}
 #--- loading ---#
-R.utils::gunzip(system.file("extdata", "pbmc4k_raw_gene_bc_matrices.tar.gz", package = "zhejiang2020"))
-utils::untar(system.file("extdata", "pbmc4k_raw_gene_bc_matrices.tar", package = "zhejiang2020"), exdir = ".")
+R.utils::gunzip(system.file("extdata", "pbmc4k_raw_gene_bc_matrices.tar.gz", package = "zhejiang2020"),destname ="./pbmc4k.tar")
+utils::untar("pbmc4k.tar")
 
 library(DropletUtils)
-fname <- file.path("raw_gene_bc_matrices/GRCh38")
+fname <- "raw_gene_bc_matrices/GRCh38"
 sce.pbmc <- read10xCounts(fname, col.names=TRUE)
 ```
 

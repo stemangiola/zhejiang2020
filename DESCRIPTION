@@ -52,11 +52,16 @@ Imports:
     SingleCellExperiment,
     igraph,
     Glimma,
-    Mus.musculus
+    Mus.musculus,
+    gplots,
+    RColorBrewer,
+    R.utils,
+    RNAseq123
 Suggests:
     knitr,
     rmarkdown,
-    pkgdown
+    pkgdown,
+    BiocStyle
 Biarch: true
 biocViews: RNASeq, DifferentialExpression, GeneExpression, Normalization, Clustering, QualityControl, Sequencing, SingleCell, Transcription, Transcriptomics
 URL: https://stemangiola.github.io/zhejiang2020/

@@ -53,14 +53,12 @@ Imports:
     igraph,
     Glimma,
     Mus.musculus,Biobase,
-    BiocFileCache,
     DropletUtils,
     EnsDb.Hsapiens.v86,
     RColorBrewer,
     pheatmap,
     TENxPBMCData,
     Rtsne,
-    uwot,
     igraph,
     celldex
 Suggests:

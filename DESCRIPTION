@@ -48,7 +48,7 @@ Imports:
     plotly,
     survival,
     SingleR,
-    R.utils
+    R.utils,
     SummarizedExperiment,
     SingleCellExperiment,
     igraph,

@@ -2,10 +2,9 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  limmaWorkflow: limmaWorkflow.html
-  limmaWorkflow_CN: limmaWorkflow_CN.html
+  sc_analysis: sc_analysis.html
   vignette_template: vignette_template.html
-last_built: 2020-11-10T08:06Z
+last_built: 2020-11-10T10:46Z
 urls:
   reference: https://stemangiola.github.io/zhejiang2020/reference
   article: https://stemangiola.github.io/zhejiang2020/articles

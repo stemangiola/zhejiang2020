@@ -100,7 +100,7 @@ counts =
     # Sample annotation
      zhejiang2020::dge_list$samples %>%
       as_tibble(rownames="sample") %>%
-      select(-lib.size, -norm.factors)
+      select(-lib.size, -norm.factors, -files)
     
   ) %>%
     

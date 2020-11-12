@@ -4,6 +4,9 @@
     <loc>https://stemangiola.github.io/zhejiang2020/index.html</loc>
   </url>
   <url>
+    <loc>https://stemangiola.github.io/zhejiang2020/reference/dge_list.html</loc>
+  </url>
+  <url>
     <loc>https://stemangiola.github.io/zhejiang2020/reference/pasilla.html</loc>
   </url>
   <url>
@@ -11,6 +14,9 @@
   </url>
   <url>
     <loc>https://stemangiola.github.io/zhejiang2020/articles/limmaWorkflow_CN.html</loc>
+  </url>
+  <url>
+    <loc>https://stemangiola.github.io/zhejiang2020/articles/tidy_limmaWorkflow.html</loc>
   </url>
   <url>
     <loc>https://stemangiola.github.io/zhejiang2020/articles/vignette_template.html</loc>

@@ -10,11 +10,16 @@ vignette: >
   %\VignetteIndexEntry{Bulk Tidy Transcriptomics - analysis of bulk RNA sequencing data with R tidy principles}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: "`r file.path(system.file(package='biocasia2020tidytranscriptomics', 'vignettes'), 'tidytranscriptomics.bib')`"
+bibliography: "`r file.path(system.file(package='zhejiang2020', 'vignettes'), 'tidytranscriptomics.bib')`"
 output:
   BiocStyle::html_document:
     fig_caption: true
 ---
+
+```{r setup, message=FALSE, echo = FALSE}
+options(digits=3)
+options(width=90)
+```
 
 ```{r, echo=FALSE, out.width = "100px"}
 knitr::include_graphics("../inst/vignettes/tidybulk_logo.png")
@@ -31,11 +36,6 @@ Measuring gene expression on a genome-wide scale has become common practice over
 There are many steps involved in analysing an RNA sequencing dataset. Sequenced reads are aligned to a reference genome, then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on in R. While mapping and counting are important and necessary tasks, today we will be starting from the count data and showing how differential expression analysis can be performed in a friendly way using the Bioconductor package, tidybulk.
 
 # Set-up
-
-```{r setup, message=FALSE, echo = FALSE}
-options(digits=3)
-options(width=90)
-```
 
 ```{r setup2, eval=TRUE, message=FALSE}
 

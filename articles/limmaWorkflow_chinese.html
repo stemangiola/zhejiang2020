@@ -73,8 +73,8 @@
 
       
 
-      </header><script src="limmaWorkflow_CN_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="limmaWorkflow_CN_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="limmaWorkflow_CN_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="limmaWorkflow_chinese_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="limmaWorkflow_chinese_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="limmaWorkflow_chinese_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>使用limma、Glimma和edgeR，RNA-seq数据分析易如反掌</h1>
@@ -94,8 +94,8 @@
             <address class="author_afil">
       The Walter and Eliza Hall Institute of Medical Research, 1G Royal Parade, Parkville, VIC 3052, Melbourne, Australia; Department of Medical Biology, The University of Melbourne, Parkville, VIC 3010, Melbourne, Australia; School of Mathematics and Statistics, The University of Melbourne, Parkville, VIC 3010, Melbourne, Australia<br><h4 class="date">2018年12月17日</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/stemangiola/zhejiang2020/blob/master/vignettes/limmaWorkflow_CN.Rmd"><code>vignettes/limmaWorkflow_CN.Rmd</code></a></small>
-      <div class="hidden name"><code>limmaWorkflow_CN.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/stemangiola/zhejiang2020/blob/master/vignettes/limmaWorkflow_chinese.Rmd"><code>vignettes/limmaWorkflow_chinese.Rmd</code></a></small>
+      <div class="hidden name"><code>limmaWorkflow_chinese.Rmd</code></div>
 
     </address>
 </address>
@@ -340,7 +340,7 @@
 <span class="op">}</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, <span class="va">samplenames</span>, text.col<span class="op">=</span><span class="va">col</span>, bty<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/filterplot1-1.png" alt="每个样本过滤前的原始数据（A）和过滤后（B）的数据的log-CPM值密度。竖直虚线标出了过滤步骤中所用阈值（相当于CPM值为约0.2）。" width="768"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/filterplot1-1.png" alt="每个样本过滤前的原始数据（A）和过滤后（B）的数据的log-CPM值密度。竖直虚线标出了过滤步骤中所用阈值（相当于CPM值为约0.2）。" width="768"><p class="caption">
 每个样本过滤前的原始数据（A）和过滤后（B）的数据的log-CPM值密度。竖直虚线标出了过滤步骤中所用阈值（相当于CPM值为约0.2）。
 </p>
 </div>
@@ -375,7 +375,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">lcpm</span>, las<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="va">col</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"B. Example: Normalised data"</span>,ylab<span class="op">=</span><span class="st">"Log-cpm"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/plotmodifieddata-1.png" alt="样例数据：log-CPM值的箱线图展示了未经归一化的数据（A）及归一化后的数据（B）中每个样本的表达分布。数据集经过调整，样本1和2中的表达计数分别被缩放到其原始值的5%和500%。" width="768"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/plotmodifieddata-1.png" alt="样例数据：log-CPM值的箱线图展示了未经归一化的数据（A）及归一化后的数据（B）中每个样本的表达分布。数据集经过调整，样本1和2中的表达计数分别被缩放到其原始值的5%和500%。" width="768"><p class="caption">
 样例数据：log-CPM值的箱线图展示了未经归一化的数据（A）及归一化后的数据（B）中每个样本的表达分布。数据集经过调整，样本1和2中的表达计数分别被缩放到其原始值的5%和500%。
 </p>
 </div>
@@ -402,7 +402,7 @@
 <span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotMDS.html">plotMDS</a></span><span class="op">(</span><span class="va">lcpm</span>, labels<span class="op">=</span><span class="va">lane</span>, col<span class="op">=</span><span class="va">col.lane</span>, dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"B. Sequencing lanes"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/MDS1-1.png" alt="以样品分组上色并标记的log-CPM值在维度1和2的MDS图（A）和以测序泳道上色并标记的维度3和4的MDS图（B）。图中的距离对应于领先倍数变化（leading fold-change），默认情况下也就是前500个在每对样品之间差异最大的基因的平均（均方根）log2倍数变化。" width="768"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/MDS1-1.png" alt="以样品分组上色并标记的log-CPM值在维度1和2的MDS图（A）和以测序泳道上色并标记的维度3和4的MDS图（B）。图中的距离对应于领先倍数变化（leading fold-change），默认情况下也就是前500个在每对样品之间差异最大的基因的平均（均方根）log2倍数变化。" width="768"><p class="caption">
 以样品分组上色并标记的log-CPM值在维度1和2的MDS图（A）和以测序泳道上色并标记的维度3和4的MDS图（B）。图中的距离对应于领先倍数变化（leading fold-change），默认情况下也就是前500个在每对样品之间差异最大的基因的平均（均方根）log2倍数变化。
 </p>
 </div>
@@ -537,7 +537,7 @@
 <span class="va">efit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes</a></span><span class="op">(</span><span class="va">vfit</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span><span class="va">efit</span>, main<span class="op">=</span><span class="st">"Final model: Mean-variance trend"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/voom-1.png" alt="图中绘制了每个基因的均值（x轴）和方差（y轴），显示了在该数据上使用`voom`前它们之间的相关性（左），以及当运用`voom`的权重后这种趋势是如何消除的（右）。左侧的图是使用`voom`函数绘制的，它为log-CPM转换后的数据拟合线性模型并提取残差方差。然后，对方差取四次方根（或对标准差取平方根），并相对每个基因的平均表达作图。均值通过平均计数加上2再进行log2转换计算得到。右侧的图使用`plotSA`绘制了log2残差标准差与log-CPM均值的关系。在这两幅图中，每个黑点表示一个基因。左侧图中，红色曲线展示了用于计算voom权重的估算所得的均值-方差趋势。右侧图中，由经验贝叶斯算法得到的平均log2残差标准差由水平蓝线标出。 " width="768"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/voom-1.png" alt="图中绘制了每个基因的均值（x轴）和方差（y轴），显示了在该数据上使用`voom`前它们之间的相关性（左），以及当运用`voom`的权重后这种趋势是如何消除的（右）。左侧的图是使用`voom`函数绘制的，它为log-CPM转换后的数据拟合线性模型并提取残差方差。然后，对方差取四次方根（或对标准差取平方根），并相对每个基因的平均表达作图。均值通过平均计数加上2再进行log2转换计算得到。右侧的图使用`plotSA`绘制了log2残差标准差与log-CPM均值的关系。在这两幅图中，每个黑点表示一个基因。左侧图中，红色曲线展示了用于计算voom权重的估算所得的均值-方差趋势。右侧图中，由经验贝叶斯算法得到的平均log2残差标准差由水平蓝线标出。 " width="768"><p class="caption">
 图中绘制了每个基因的均值（x轴）和方差（y轴），显示了在该数据上使用<code>voom</code>前它们之间的相关性（左），以及当运用<code>voom</code>的权重后这种趋势是如何消除的（右）。左侧的图是使用<code>voom</code>函数绘制的，它为log-CPM转换后的数据拟合线性模型并提取残差方差。然后，对方差取四次方根（或对标准差取平方根），并相对每个基因的平均表达作图。均值通过平均计数加上2再进行log2转换计算得到。右侧的图使用<code>plotSA</code>绘制了log2残差标准差与log-CPM均值的关系。在这两幅图中，每个黑点表示一个基因。左侧图中，红色曲线展示了用于计算voom权重的估算所得的均值-方差趋势。右侧图中，由经验贝叶斯算法得到的平均log2残差标准差由水平蓝线标出。
 </p>
 </div>
@@ -581,7 +581,7 @@
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/limma/man/venn.html">vennDiagram</a></span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, circle.col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"turquoise"</span>, <span class="st">"salmon"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/venn-1.png" alt="韦恩图展示了仅basal和LP（左）、仅basal和ML（右）的对比的DE基因数量，还有两种对比中共同的DE基因数量（中）。在任何对比中均不差异表达的基因数量标于右下。" width="576"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/venn-1.png" alt="韦恩图展示了仅basal和LP（左）、仅basal和ML（右）的对比的DE基因数量，还有两种对比中共同的DE基因数量（中）。在任何对比中均不差异表达的基因数量标于右下。" width="576"><p class="caption">
 韦恩图展示了仅basal和LP（左）、仅basal和ML（右）的对比的DE基因数量，还有两种对比中共同的DE基因数量（中）。在任何对比中均不差异表达的基因数量标于右下。
 </p>
 </div>
@@ -641,7 +641,7 @@
    col<span class="op">=</span><span class="va">mycol</span>, trace<span class="op">=</span><span class="st">"none"</span>, density.info<span class="op">=</span><span class="st">"none"</span>, 
    margin<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>,<span class="fl">6</span><span class="op">)</span>, lhei<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">10</span><span class="op">)</span>, dendrogram<span class="op">=</span><span class="st">"column"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/heatmap-1.png" alt="在basal和LP的对比中前100个DE基因log-CPM值的热图。经过缩放调整后，每个基因（每行）的表达均值为0，并且标准差为1。给定基因相对高表达的样本被标记为红色，相对低表达的样本被标记为蓝色。浅色和白色代表中等表达水平的基因。样本和基因已通过分层聚类的方法重新排序。图中显示有样本聚类的树状图。" width="480"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/heatmap-1.png" alt="在basal和LP的对比中前100个DE基因log-CPM值的热图。经过缩放调整后，每个基因（每行）的表达均值为0，并且标准差为1。给定基因相对高表达的样本被标记为红色，相对低表达的样本被标记为蓝色。浅色和白色代表中等表达水平的基因。样本和基因已通过分层聚类的方法重新排序。图中显示有样本聚类的树状图。" width="480"><p class="caption">
 在basal和LP的对比中前100个DE基因log-CPM值的热图。经过缩放调整后，每个基因（每行）的表达均值为0，并且标准差为1。给定基因相对高表达的样本被标记为红色，相对低表达的样本被标记为蓝色。浅色和白色代表中等表达水平的基因。样本和基因已通过分层聚类的方法重新排序。图中显示有样本聚类的树状图。
 </p>
 </div>
@@ -686,7 +686,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/limma/man/barcodeplot.html">barcodeplot</a></span><span class="op">(</span><span class="va">efit</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>, index<span class="op">=</span><span class="va">idx</span><span class="op">$</span><span class="va">LIM_MAMMARY_LUMINAL_MATURE_UP</span>, 
             index2<span class="op">=</span><span class="va">idx</span><span class="op">$</span><span class="va">LIM_MAMMARY_LUMINAL_MATURE_DN</span>, main<span class="op">=</span><span class="st">"LPvsML"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="limmaWorkflow_CN_files/figure-html/barcodeplot-1.png" alt="`LIM_MAMMARY_LUMINAL_MATURE_UP` （红色条形，图表上方）和`LIM_MAMMARY_LUMINAL_MATURE_DN`（蓝色条形，图表下方）基因集在LP和ML的对比中的条码图，每个基因集都有一条富集线展示了竖直条形在图表每部分的相对富集程度。Lim等人的实验[@Lim:BreastCancerRes:2010]与我们的非常相似，用了相同的方式分选获取细胞群，只是他们使用了微阵列而不是RNA-seq来测定基因表达。需要注意上调基因集发生下调而下调基因集发生上调的逆相关性来自于对比的设定方式（LP相比于ML），如果将其对调，方向性将会吻合。" width="576"><p class="caption">
+<img src="limmaWorkflow_chinese_files/figure-html/barcodeplot-1.png" alt="`LIM_MAMMARY_LUMINAL_MATURE_UP` （红色条形，图表上方）和`LIM_MAMMARY_LUMINAL_MATURE_DN`（蓝色条形，图表下方）基因集在LP和ML的对比中的条码图，每个基因集都有一条富集线展示了竖直条形在图表每部分的相对富集程度。Lim等人的实验[@Lim:BreastCancerRes:2010]与我们的非常相似，用了相同的方式分选获取细胞群，只是他们使用了微阵列而不是RNA-seq来测定基因表达。需要注意上调基因集发生下调而下调基因集发生上调的逆相关性来自于对比的设定方式（LP相比于ML），如果将其对调，方向性将会吻合。" width="576"><p class="caption">
 <code>LIM_MAMMARY_LUMINAL_MATURE_UP</code> （红色条形，图表上方）和<code>LIM_MAMMARY_LUMINAL_MATURE_DN</code>（蓝色条形，图表下方）基因集在LP和ML的对比中的条码图，每个基因集都有一条富集线展示了竖直条形在图表每部分的相对富集程度。Lim等人的实验<span class="citation">(Lim et al. 2010)</span>与我们的非常相似，用了相同的方式分选获取细胞群，只是他们使用了微阵列而不是RNA-seq来测定基因表达。需要注意上调基因集发生下调而下调基因集发生上调的逆相关性来自于对比的设定方式（LP相比于ML），如果将其对调，方向性将会吻合。
 </p>
 </div>

@@ -13,11 +13,15 @@ navbar:
   title: ~
   type: default
   left:
+    menu:
     - text: Bulk analyses
+    - text: English
       href: articles/limmaWorkflow.html
-    - text: Bulk analyses (chinese)
+    - text: Chinese
       href: articles/limmaWorkflow_chinese.html
+    menu:
     - text: Tidy bulk analyses
+    - text: English
       href: articles/tidy_limmaWorkflow.html
 
   right:

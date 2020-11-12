@@ -6,17 +6,19 @@ template:
     ganalytics: UA-93043521-1
 
 home:
-  title: "TidyTranscriptomics"
+  title: "Bulk and single-cell RNA sequencing analyses"
   type: inverse
   
 navbar:
   title: ~
   type: default
   left:
-    - text: Workshop
-      href: articles/tidytranscriptomics.html
-    - text: Supplementary
-      href: articles/supplementary.html
+    - text: Bulk analyses
+      href: articles/limmaWorkflow.html
+    - text: Bulk analyses (chinese)
+      href: articles/limmaWorkflow_chinese.html
+    - text: Tidy bulk analyses
+      href: articles/tidy_limmaWorkflow.html
 
   right:
    - icon: fa-github

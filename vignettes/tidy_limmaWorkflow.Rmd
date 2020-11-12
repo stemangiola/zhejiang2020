@@ -1,0 +1,286 @@
+---
+title: "Bulk Tidy Transcriptomics - analysis of bulk RNA sequencing data with R tidy principles"
+author:
+  - name: Stefano Mangiola
+    affiliation: The Walter and Eliza Hall Institute of Medical Research, 1G Royal Parade, Parkville, VIC 3052, Melbourne, Australia; Department of Medical Biology, The University of Melbourne, Parkville, VIC 3010, Melbourne, Australia
+  - name: Maria Doyle
+    affiliation: Peter MacCallum Cancer Centre, 305 Grattan Street, Parkville, Melbourne, Victoria, Australia
+date: "11 November 2020"
+vignette: >
+  %\VignetteIndexEntry{Bulk Tidy Transcriptomics - analysis of bulk RNA sequencing data with R tidy principles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: "`r file.path(system.file(package='zhejiang2020', 'vignettes'), 'tidytranscriptomics.bib')`"
+output:
+  BiocStyle::html_document:
+    fig_caption: true
+---
+
+```{r setup, message=FALSE, echo = FALSE}
+options(digits=3)
+options(width=90)
+```
+
+```{r, echo=FALSE, out.width = "100px"}
+knitr::include_graphics("../inst/vignettes/tidybulk_logo.png")
+```
+
+# Abstract
+
+This is the `tidy` version of the material in the session `RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR` of this workshop
+
+# Introduction
+
+Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA sequencing to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
+
+There are many steps involved in analysing an RNA sequencing dataset. Sequenced reads are aligned to a reference genome, then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on in R. While mapping and counting are important and necessary tasks, today we will be starting from the count data and showing how differential expression analysis can be performed in a friendly way using the Bioconductor package, tidybulk.
+
+# Set-up
+
+```{r setup2, eval=TRUE, message=FALSE}
+
+library(zhejiang2020)
+
+# tidyverse core packages
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(magrittr)
+library(ggplot2)
+
+# tidyverse-friendly packages
+library(plotly)
+library(ggrepel)
+library(GGally)
+#library(tidyHeatmap)
+library(tidybulk)
+```
+
+Plot settings. Set the colours and theme we will use for our plots.
+
+```{r}
+# Use colourblind-friendly colours
+friendly_cols <- dittoSeq::dittoColors()
+# Set theme
+custom_theme <-
+  list(
+    scale_fill_manual(values = friendly_cols),
+    scale_color_manual(values = friendly_cols),
+    theme_bw() +
+      theme(
+        panel.border = element_blank(),
+        axis.line = element_line(),
+        text = element_text(size = 12),
+        legend.position = "bottom",
+        strip.background = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1)
+      )
+  )
+```
+
+# Data packaging
+
+## Organising information within a `tibble` (user-friendly table)
+
+We can create a tibble with our gene-transcript abundance and sample annotation information
+
+```{r import1}
+
+counts = 
+  
+  # Create the counts table
+  left_join(
+  
+    # Transcript abundance
+    zhejiang2020::dge_list$counts %>%
+      as_tibble(rownames="entrez") %>% 
+      pivot_longer(-entrez, names_to="sample", values_to="count"),
+    
+    # Sample annotation
+     zhejiang2020::dge_list$samples %>%
+      as_tibble(rownames="sample") %>%
+      select(-lib.size, -norm.factors, -files)
+    
+  ) %>%
+    
+  # Add gene symbols
+  mutate(symbol = AnnotationDbi::mapIds(
+      org.Mm.eg.db::org.Mm.eg.db, 
+      keys = entrez, 
+      keytype = "ENTREZID", 
+      column="SYMBOL", 
+      multiVals = "first"
+    )) %>%
+  
+  # Filter for empty symbols
+  filter(!is.na(symbol)) %>%
+  
+  # Memorise key column names for streamlined analyses using `tidybulk`
+  tidybulk(sample, symbol, count)
+
+
+counts
+```
+
+# Aggregate duplicate gene symbols
+
+Our gene annotation contains 28 genes that map to multiple chromosomes, in this case we will combine all chromosome information from the multi-mapped genes
+
+```{r}
+counts_aggregated = 
+  counts %>%
+  aggregate_duplicates(aggregation_function = median)
+
+counts_aggregated
+```
+
+# Data pre-processing
+
+## Identifying genes that are lowly expressed
+
+As before, identifying lowly transcribed genes is necessary for several downstream analyses. We can specify the `factor of interest` for a more informed filtering. This function uses the edgeR utility `filterByExpr`. 
+
+```{r zeroes}
+counts_abundant = 
+  counts_aggregated %>%
+  identify_abundant(factor_of_interest = group)
+
+counts_abundant
+```
+
+# Scaling data for visualisation
+
+We can compensate for technical differences in sequencing depth, scaling the data (also called normalisation). By default the `TMM` [@robinson2010scaling] method is used. The scaling will be calculated on the highly-transcribed genes and applied on all genes. 
+
+
+```{r}
+counts_scaled = 
+  counts_abundant %>%
+  scale_abundance()
+
+counts_scaled %>% select(sample, symbol, contains("count"), everything())
+```
+
+We can reproduce the log-transcript-abundance density of unfiltered and filtered data (seen in the previous session of the workshop) using tidyverse tools
+
+```{r}
+bind_rows(
+  counts_scaled %>% mutate(label = "1.Unfiltered"),
+  counts_scaled %>% filter(.abundant) %>% mutate(label = "2.Filtered")
+) %>%
+  ggplot(aes(count_scaled +1, color = sample)) + 
+  geom_density() +
+  facet_wrap(~label) +
+  scale_x_log10() +
+  custom_theme
+```
+
+We can reproduce the log-transcript-abundance density of unscaled and scaled data (seen in the previous session of the workshop) using tidyverse tools
+
+```{r}
+counts_scaled %>%
+  filter(.abundant) %>%
+  
+  # We reshape the data in order to build a faceted plot
+  pivot_longer(contains("count"), names_to="processing", values_to="value") %>%
+  
+  # Build the plot
+  ggplot(aes(sample, value + 1, fill=sample)) +
+  geom_boxplot() +
+  facet_wrap(~processing) +
+  scale_y_log10() +
+  custom_theme
+```
+
+## Dimensionality reduction
+
+As previously shown, we can perform dimensionality reduction to further explore our data. The `reduce_dimensions` function, will perform calculations only on highly-transcribed genes (i.e. .abundant == TRUE) 
+
+```{r MDS1"}
+counts_scaled %>%
+  reduce_dimensions(method = "MDS", action="get") %>%
+  
+  # We reshape the data in order to build a faceted plot
+  pivot_longer(c(group, lane), names_to="annotation", values_to="value") %>%
+  
+  # Build the plot
+  ggplot(aes(Dim1, Dim2, color=value, label=value)) +
+  geom_text() +
+  facet_wrap(~annotation) +
+  custom_theme
+
+```
+
+# Differential expression analysis
+
+We can replicate the differential expression analyses using `tidybulk`
+
+```{r design}
+
+model.matrix(
+  ~0+group+lane,
+  data = pivot_sample(counts_scaled)
+)
+
+counts_test = 
+  counts_scaled %>%
+  test_differential_abundance(
+    .formula = ~0+group+lane,
+    .contrasts = c("groupBasal-groupLP", "groupBasal - groupML", "groupLP - groupML"),
+    method = "limma_voom",
+    action="get"
+  )
+
+counts_test
+
+```
+
+We can reproduce the fitted means (x-axis) and variances (y-axis) relationship of each gene, using the raw results from limma-voom.
+
+```{r}
+counts_test %>% 
+  attr("internals") %$% 
+  voom %>% 
+  limma::eBayes() %>% 
+  limma::plotSA(main="Final model: Mean-variance trend")
+```
+
+
+## Useful graphical representations of differential expression results
+
+With `ggplot2` we We can reproduce and customise the plot for the association between fold-change and average log-abundance
+
+```{r MDplot, fig.keep='none'}
+counts_test %>%
+  
+  filter(.abundant) %>%
+  
+  # Label significant
+  mutate(significant = `adj.P.Val___groupBasal-groupLP`<0.05) %>%
+  
+  # Subset labels
+  mutate(symbol = ifelse(abs(`logFC___groupBasal-groupLP`) >=8, as.character(symbol), "")) %>%
+  
+  ggplot(aes(
+    x=`AveExpr___groupBasal-groupLP`, 
+    y=`logFC___groupBasal-groupLP`, 
+    label=symbol
+  )) +
+  geom_point(aes(color = significant, size = significant, alpha=significant)) +
+  
+  # Customisation
+  geom_text_repel() +
+  scale_color_manual(values=c("black", "#e11f28")) +
+  scale_size_discrete(range = c(0, 1)) +
+  theme_bw()
+
+```
+
+
+
+```{r softwareinfo}
+sessionInfo()
+```
+
+# References

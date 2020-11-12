@@ -12,7 +12,7 @@
 
 ## Syllabus
 
-Material [web page](https://stemangiola.github.io/zhejiang2020/articles/tidytranscriptomics.html).
+Material [web page](https://stemangiola.github.io/zhejiang2020/).
 
 This material was created for the [Zhejiang 2020 workshop](https://zhejiang2020.bioconductor.org/) workshop but it can also be used for self-learning.
 

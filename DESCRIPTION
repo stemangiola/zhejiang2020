@@ -20,10 +20,8 @@ Depends:
 Imports:
     tidybulk,
     tidySingleCellExperiment,
-    uwot,
     scater,
     scran,
-    tidyHeatmap,
     stats,
     utils,
     tibble,
@@ -33,27 +31,18 @@ Imports:
     readr,
     tidyr,
     purrr,
-    forcats,
     limma,
     edgeR,
-    DESeq2,
-    acepack,
     ggrepel,
-    airway,
-    org.Hs.eg.db,
-    org.Dm.eg.db,
-    AnnotationDbi,
     dittoSeq,
-    GGally,
-    plotly,
-    survival,
     SingleR,
     R.utils,
     SummarizedExperiment,
     SingleCellExperiment,
     igraph,
     Glimma,
-    Mus.musculus,Biobase,
+    Mus.musculus,
+    Biobase,
     DropletUtils,
     EnsDb.Hsapiens.v86,
     RColorBrewer,
@@ -61,11 +50,14 @@ Imports:
     TENxPBMCData,
     Rtsne,
     igraph,
-    celldex
+    celldex,
+    gplots,
+    RNAseq123
 Suggests:
     knitr,
     rmarkdown,
-    pkgdown
+    pkgdown,
+    BiocStyle
 Biarch: true
 biocViews: RNASeq, DifferentialExpression, GeneExpression, Normalization, Clustering, QualityControl, Sequencing, SingleCell, Transcription, Transcriptomics
 URL: https://stemangiola.github.io/zhejiang2020/

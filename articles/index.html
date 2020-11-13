@@ -87,14 +87,26 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../articles/limmaWorkflow.html">Bulk analyses</a>
-</li>
-<li>
-  <a href="../articles/limmaWorkflow_chinese.html">Bulk analyses (chinese)</a>
-</li>
-<li>
-  <a href="../articles/tidy_limmaWorkflow.html">Tidy bulk analyses</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bulk analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R base</li>
+    <li>
+      <a href="../articles/limmaWorkflow.html">English</a>
+    </li>
+    <li>
+      <a href="../articles/limmaWorkflow_chinese.html">Chinese</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Tidy transcriptomics</li>
+    <li>
+      <a href="../articles/tidy_limmaWorkflow.html">English</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -135,6 +147,8 @@
         <dd></dt>
         <dt><a href="limmaWorkflow_chinese.html">使用limma、Glimma和edgeR，RNA-seq数据分析易如反掌</a></dt>
         <dd></dt>
+        <dt><a href="sc_analysis.html">10X 单细胞测序数据分析</a></dt>
+        <dd></dt>
         <dt><a href="tidy_limmaWorkflow.html">Bulk Tidy Transcriptomics - analysis of bulk RNA sequencing data with R tidy principles</a></dt>
         <dd></dt>
         <dt><a href="vignette_template.html">Introduction to Tidy Transcriptomics</a></dt>
@@ -147,7 +161,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maria Doyle, Stefano Mangiola.</p>
+  <p>Developed by Xueyi Dong, Luyi Tian, Yue You, Stefano Mangiola.</p>
 </div>
 
 <div class="pkgdown">

@@ -1,0 +1,251 @@
+---
+title: "10X 单细胞测序数据分析"
+output: rmarkdown::html_vignette
+author: 
+  - name: Yue You
+  - name: Luyi Tian
+vignette: >
+  %\VignetteIndexEntry{10X 单细胞测序数据分析}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE, out.width = "100px"}
+knitr::include_graphics("../inst/vignettes/tidybulk_logo.png")
+```
+
+
+## Introduction
+
+# Set-up
+
+```{r setup2, eval=TRUE, message=FALSE}
+
+library(zhejiang2020)
+
+# Bioconductor
+library(scran)
+library(scater)
+library(EnsDb.Hsapiens.v86)
+
+# tidyverse core packages
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(magrittr)
+library(ggplot2)
+library(ggbeeswarm)
+
+#library(tidyHeatmap)
+library(SingleCellExperiment)
+library(tidySingleCellExperiment)
+```
+
+
+
+### Participation
+
+After the lecture, participants are expected to follow along the hands-on session. we highly recommend participants bringing your own laptop.
+
+### _R_ / _Bioconductor_ packages used
+
+The following R/Bioconductor packages will be explicitly used: 
+
+* tidySingleCellExperiment
+* DropletUtils
+* scran
+* scater
+* singleR
+
+### Time outline
+
+| Activity                         | Time |
+|----------------------------------|------|
+| Analysis workflow                | 1.5h  |
+| Q & A                            | 30m  |
+
+
+## 数据准备
+
+We get the original SingleCellExperiment data used in the previous session.
+
+```{r}
+zhejiang2020::single_cell_experiment
+```
+
+We can get a tidy representation where cell-wise information is displayed. The dataframe is displayed as `tibble abstraction`, to indicate that appears and act as a `tibble`, but underlies a `SingleCellExperiment`.
+
+```{r}
+counts = 
+  zhejiang2020::single_cell_experiment %>% 
+  tidy()
+
+counts
+```
+
+If we need, we can extract transcript information too. A regular tibble will be returned for independent visualisation and analyses.
+
+```{r}
+counts %>%
+  join_transcripts("ENSG00000228463")
+```
+
+对于得到的基因，根据gene ID 进行基因注释，得到基因名，并且知道其所在染色体（用于之后的细胞质量控制）。
+
+```{r}
+#--- gene-annotation ---#
+rownames(counts) <- 
+  uniquifyFeatureNames(
+    rowData(counts)$ID,
+    rowData(counts)$Symbol
+  )
+```
+
+
+这里，我们认为线粒体基因表达量高的barcode对应细胞质mRNA已经流出的破损细胞。并用这个指标来进行筛查过滤。
+```{r}
+# Gene product location
+location <- mapIds(
+  EnsDb.Hsapiens.v86, 
+  keys=rowData(counts)$ID, 
+  column="SEQNAME",
+  keytype="GENEID"
+)
+
+#--- quality-control ---#
+counts_annotated = 
+  counts %>%
+  
+  # Join mitochondrion statistics
+  left_join(
+    perCellQCMetrics(., subsets=list(Mito=which(location=="MT"))) %>%
+    as_tibble(rownames="cell"),
+    by="cell"
+  ) %>%
+  
+  # Label cells
+  mutate(high_mitochondrion = isOutlier(subsets_Mito_percent, type="higher")) 
+```
+
+We can plot various statistics
+
+```{r}
+counts_annotated %>%
+  plotColData(
+    y = "subsets_Mito_percent",
+    colour_by = "high_mitochondrion"
+  ) +
+  ggtitle("Mito percent")
+
+counts_annotated %>%
+  ggplot(aes(x=1,y=subsets_Mito_percent,
+             color = high_mitochondrion, 
+             alpha=high_mitochondrion,
+             size= high_mitochondrion
+            )) +
+  ggbeeswarm::geom_quasirandom() +
+
+  # Customisation
+  scale_color_manual(values=c("black", "#e11f28")) +
+  scale_size_discrete(range = c(0, 2))
+
+```
+
+
+```{r}
+counts_filtered = 
+  counts_annotated %>%
+  
+  # Filter data
+  filter(!high_mitochondrion)
+
+counts_filtered
+```
+
+
+
+### Scaling
+
+
+
+
+```{r}
+#--- normalization ---#
+set.seed(1000)
+
+# Calculate clusters
+clusters <- quickCluster(counts_filtered)
+
+# Add scaled counts
+counts_scaled <- 
+  counts_filtered %>%
+  computeSumFactors(cluster=clusters) %>%
+  logNormCounts()
+
+counts_scaled %>%
+  join_transcripts("CD79B")
+```
+
+
+### Detect variable gene-transcripts
+
+为了减轻下游分析工具的计算负担，减少数据中的噪声，我们需要先进行特征选择。
+
+```{r}
+#--- variance-modelling ---#
+set.seed(1001)
+gene_variability <- modelGeneVarByPoisson(counts_scaled)
+top_variable <- getTopHVGs(gene_variability, prop=0.1)
+```
+
+### Dimensionality reduction
+
+
+特征选择后，单细胞表达矩阵的维数可以通过专门的降维算法进一步降低。使得数据可以直观可视化，并且将数据简化为基本组成部分。
+
+```{r}
+#--- dimensionality-reduction ---#
+set.seed(10000)
+counts_reduction <- 
+  counts_scaled %>%
+  denoisePCA(subset.row=top_variable, technical=gene_variability) %>%
+  runTSNE(dimred="PCA") %>%
+  runUMAP(dimred="PCA")
+
+counts_reduction
+```
+
+## Clustering
+
+
+```{r}
+counts_cluster <-
+  counts_reduction %>%
+  mutate(
+    cluster = 
+      buildSNNGraph(., k=10, use.dimred = 'PCA') %>%
+      igraph::cluster_louvain() %$%
+      membership %>%
+      as.factor()
+  )
+  
+counts_cluster
+
+```
+
+使用tSNE对聚类进行可视化。
+
+```{r}
+plotTSNE(counts_cluster, colour_by="cluster",text_by="cluster")
+
+
+counts_cluster %>%
+  ggplot(aes(
+    TSNE1, TSNE2, 
+    color=cluster, 
+    size = 1/subsets_Mito_percent 
+  )) +
+  geom_point(alpha=0.2) +
+  theme_bw()
+```

@@ -10,7 +10,10 @@ Authors@R: c(
     role = c("aut")),
     person("Stefano", "Mangiola", email="mangiola.s@wehi.edu.au",
     role = c("aut","cre"),
-    comment = c(ORCID = "0000-0001-7474-836X")))
+    comment = c(ORCID = "0000-0001-7474-836X")),
+    person("Maria", "Doyle", email = "Maria.Doyle@petermac.org",
+            role = c("ctb"))
+    )
 Maintainer: Stefano Mangiola <mangiola.s@wehi.edu.au>
 Description: This workshop will present how to perform analysis of RNA sequencing data following the tidy data paradigm, using the tidybulk, tidySingleCellExperiment, tidyHeatmap and tidyverse packages.
 License: CC BY-SA 4.0 + file LICENSE

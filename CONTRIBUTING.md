@@ -1,4 +1,4 @@
-Contributing to TidyTranscriptomics Workshop
+Contributing to Zhejiang 2020 Workshop
 ===
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
@@ -14,7 +14,7 @@ The following is a set of guidelines for contributing to this training material 
 
 # What should I know before I get started?
 
-This repository contains the files for the TidyTranscriptomics workshop.
+This repository contains the files for the Zhejiang 2020 workshop.
 
 By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE).
 

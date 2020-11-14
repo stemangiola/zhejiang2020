@@ -13,27 +13,26 @@ navbar:
   title: ~
   type: default
   left:
-    articles:
-      text: Bulk analyses
-      menu:
-      - text: R base
-      - text: English
-        href: articles/limmaWorkflow.html
-      - text: Chinese
-        href: articles/limmaWorkflow_chinese.html
-      - text: -------
-      - text: Tidy transcriptomics
-      - text: English
-        href: articles/tidy_limmaWorkflow.html
-      text: Single-cell analyses
-      menu:
-      - text: R base
-      - text: Chinese
-        href: articles/sc_analysis.html
-      - text: -------
-      - text: Tidy transcriptomics
-      - text: English
-        href: articles/tidy_single_Cell.html
+  - text: Bulk analyses
+    menu:
+    - text: R base
+    - text: English
+      href: articles/limmaWorkflow.html
+    - text: Chinese
+      href: articles/limmaWorkflow_chinese.html
+    - text: -------
+    - text: Tidy transcriptomics
+    - text: English
+      href: articles/tidy_limmaWorkflow.html
+  - text: Single-cell analyses
+    menu:
+    - text: R base
+    - text: Chinese
+      href: articles/sc_analysis.html
+    - text: -------
+    - text: Tidy transcriptomics
+    - text: English
+      href: articles/tidy_single_Cell.html
 
   right:
    - icon: fa-github

@@ -10,6 +10,9 @@
     <loc>https://stemangiola.github.io/zhejiang2020/reference/pasilla.html</loc>
   </url>
   <url>
+    <loc>https://stemangiola.github.io/zhejiang2020/reference/single_cell_experiment.html</loc>
+  </url>
+  <url>
     <loc>https://stemangiola.github.io/zhejiang2020/articles/limmaWorkflow.html</loc>
   </url>
   <url>
@@ -20,6 +23,9 @@
   </url>
   <url>
     <loc>https://stemangiola.github.io/zhejiang2020/articles/tidy_limmaWorkflow.html</loc>
+  </url>
+  <url>
+    <loc>https://stemangiola.github.io/zhejiang2020/articles/tidy_single_cell.html</loc>
   </url>
   <url>
     <loc>https://stemangiola.github.io/zhejiang2020/articles/vignette_template.html</loc>

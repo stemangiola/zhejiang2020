@@ -32,7 +32,7 @@ navbar:
     - text: -------
     - text: Tidy transcriptomics
     - text: English
-      href: articles/tidy_single_Cell.html
+      href: articles/tidy_single_cell.html
 
   right:
    - icon: fa-github

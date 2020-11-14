@@ -58,7 +58,8 @@ Imports:
     igraph,
     celldex,
     gplots,
-    RNAseq123
+    RNAseq123,
+    ggbeeswarm
 Suggests:
     knitr,
     rmarkdown,

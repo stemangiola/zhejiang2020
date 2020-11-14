@@ -15,3 +15,12 @@
 #' @source \url{https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63310}
 #' @usage data(dge_list)
 "dge_list"
+
+#' single_cell_experiment
+#'
+#' dge_list  gene count data in SingleCellExperiment format
+#'
+#' @format  A SingleCellExperiment object
+#' @source \url{https://osca.bioconductor.org}
+#' @usage data(single_cell_experiment)
+"single_cell_experiment"

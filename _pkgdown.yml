@@ -25,7 +25,6 @@ navbar:
       - text: Tidy transcriptomics
       - text: English
         href: articles/tidy_limmaWorkflow.html
-    articles:
       text: Single-cell analyses
       menu:
       - text: R base

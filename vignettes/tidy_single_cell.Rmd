@@ -1,13 +1,19 @@
 ---
-title: "10X 单细胞测序数据分析"
-output: rmarkdown::html_vignette
-author: 
-  - name: Yue You
-  - name: Luyi Tian
+title: "Single-cell Tidy Transcriptomics - analysis of single-cell RNA sequencing data with R tidy principles"
+author:
+  - name: Stefano Mangiola
+    affiliation: The Walter and Eliza Hall Institute of Medical Research, 1G Royal Parade, Parkville, VIC 3052, Melbourne, Australia; Department of Medical Biology, The University of Melbourne, Parkville, VIC 3010, Melbourne, Australia
+  - name: Maria Doyle
+    affiliation: Peter MacCallum Cancer Centre, 305 Grattan Street, Parkville, Melbourne, Victoria, Australia
+date: "11 November 2020"
 vignette: >
-  %\VignetteIndexEntry{10X 单细胞测序数据分析}
+  %\VignetteIndexEntry{Single-cell Tidy Transcriptomics - analysis of single-cell RNA sequencing data with R tidy principles}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: "`r file.path(system.file(package='zhejiang2020', 'vignettes'), 'tidytranscriptomics.bib')`"
+output:
+  BiocStyle::html_document:
+    fig_caption: true
 ---
 
 ```{r, echo=FALSE, out.width = "100px"}

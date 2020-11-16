@@ -8,7 +8,7 @@
 
 * Xueyi Dong <dong.x at wehi.edu.au>
 * Luyi Tian <tian.l at wehi.edu.au>
-* Yue You <you.y at wehi.edu.au>
+* Hongke Peng <peng.h at wehi.edu.au>
 * Stefano Mangiola <mangiola.s at wehi.edu.au>
 
 ## Syllabus

@@ -72,7 +72,7 @@ The following R/Bioconductor packages will be explicitly used:
 | Q & A                            | 30m  |
 
 
-## 数据准备
+## Data loading
 
 We get the original SingleCellExperiment data used in the previous session.
 
@@ -97,7 +97,7 @@ counts %>%
   join_transcripts("ENSG00000228463")
 ```
 
-对于得到的基因，根据gene ID 进行基因注释，得到基因名，并且知道其所在染色体（用于之后的细胞质量控制）。
+As before, we add gene symbols to the data
 
 ```{r}
 #--- gene-annotation ---#
@@ -109,7 +109,8 @@ rownames(counts) <-
 ```
 
 
-这里，我们认为线粒体基因表达量高的barcode对应细胞质mRNA已经流出的破损细胞。并用这个指标来进行筛查过滤。
+We check the mitochondrial expression for all cells
+
 ```{r}
 # Gene product location
 location <- mapIds(
@@ -145,16 +146,19 @@ counts_annotated %>%
   ggtitle("Mito percent")
 
 counts_annotated %>%
-  ggplot(aes(x=1,y=subsets_Mito_percent,
-             color = high_mitochondrion, 
-             alpha=high_mitochondrion,
-             size= high_mitochondrion
-            )) +
-  ggbeeswarm::geom_quasirandom() +
-
-  # Customisation
-  scale_color_manual(values=c("black", "#e11f28")) +
-  scale_size_discrete(range = c(0, 2))
+	pivot_longer(c(detected , sum, subsets_Mito_percent)) %>%
+	ggplot(aes(x=Sample,y=value,
+						 color = high_mitochondrion, 
+						 alpha=high_mitochondrion,
+						 size= high_mitochondrion
+	)) +
+	ggbeeswarm::geom_quasirandom() +
+	facet_wrap(~name, scale="free_y") +
+	
+	# Customisation
+	scale_color_manual(values=c("black", "#e11f28")) +
+	scale_size_discrete(range = c(0, 2)) +
+  theme_bw()
 
 ```
 
@@ -172,8 +176,6 @@ counts_filtered
 
 
 ### Scaling
-
-
 
 
 ```{r}
@@ -196,8 +198,6 @@ counts_scaled %>%
 
 ### Detect variable gene-transcripts
 
-为了减轻下游分析工具的计算负担，减少数据中的噪声，我们需要先进行特征选择。
-
 ```{r}
 #--- variance-modelling ---#
 set.seed(1001)
@@ -207,8 +207,6 @@ top_variable <- getTopHVGs(gene_variability, prop=0.1)
 
 ### Dimensionality reduction
 
-
-特征选择后，单细胞表达矩阵的维数可以通过专门的降维算法进一步降低。使得数据可以直观可视化，并且将数据简化为基本组成部分。
 
 ```{r}
 #--- dimensionality-reduction ---#
@@ -240,7 +238,6 @@ counts_cluster
 
 ```
 
-使用tSNE对聚类进行可视化。
 
 ```{r}
 plotTSNE(counts_cluster, colour_by="cluster",text_by="cluster")

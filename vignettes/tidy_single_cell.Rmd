@@ -145,16 +145,19 @@ counts_annotated %>%
   ggtitle("Mito percent")
 
 counts_annotated %>%
-  ggplot(aes(x=1,y=subsets_Mito_percent,
-             color = high_mitochondrion, 
-             alpha=high_mitochondrion,
-             size= high_mitochondrion
-            )) +
-  ggbeeswarm::geom_quasirandom() +
-
-  # Customisation
-  scale_color_manual(values=c("black", "#e11f28")) +
-  scale_size_discrete(range = c(0, 2))
+	pivot_longer(c(detected , sum, subsets_Mito_percent)) %>%
+	ggplot(aes(x=Sample,y=value,
+						 color = high_mitochondrion, 
+						 alpha=high_mitochondrion,
+						 size= high_mitochondrion
+	)) +
+	ggbeeswarm::geom_quasirandom() +
+	facet_wrap(~name, scale="free_y") +
+	
+	# Customisation
+	scale_color_manual(values=c("black", "#e11f28")) +
+	scale_size_discrete(range = c(0, 2)) +
+  theme_bw()
 
 ```
 

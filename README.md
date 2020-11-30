@@ -108,7 +108,7 @@ First day
 |------------------------------------------|---------|
 | Bulk RNA sequencing analyses             | 1h 20m  |
 | Questions                                | 20m     |
-| Break                                    | 10m     |
+| Break                                    | 30m     |
 | Tidy bulk RNA sequencing analyses        | 30m     |
 | Questions                                | 20m     |
 
@@ -118,7 +118,7 @@ Second day
 |------------------------------------------|---------|
 | Single-cell RNA sequencing analyses      | 1h 20m  |
 | Questions                                | 20m     |
-| Break                                    | 10m     |
+| Break                                    | 30m     |
 | Tidy single-cell RNA sequencing analyses | 30m     |
 | Questions                                | 20m     |
 

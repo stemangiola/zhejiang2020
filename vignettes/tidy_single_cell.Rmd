@@ -68,11 +68,11 @@ The following R/Bioconductor packages will be explicitly used:
 
 | Activity                         | Time |
 |----------------------------------|------|
-| Analysis workflow                | 1.5h  |
-| Q & A                            | 30m  |
+| Analysis workflow                | 30m  |
+| Q & A                            | 20m  |
 
 
-## 数据准备
+## Data loading
 
 We get the original SingleCellExperiment data used in the previous session.
 
@@ -97,7 +97,7 @@ counts %>%
   join_transcripts("ENSG00000228463")
 ```
 
-对于得到的基因，根据gene ID 进行基因注释，得到基因名，并且知道其所在染色体（用于之后的细胞质量控制）。
+As before, we add gene symbols to the data
 
 ```{r}
 #--- gene-annotation ---#
@@ -108,8 +108,8 @@ rownames(counts) <-
   )
 ```
 
+We check the mitochondrial expression for all cells
 
-这里，我们认为线粒体基因表达量高的barcode对应细胞质mRNA已经流出的破损细胞。并用这个指标来进行筛查过滤。
 ```{r}
 # Gene product location
 location <- mapIds(
@@ -158,6 +158,7 @@ counts_annotated %>%
 
 ```
 
+We can filter the the alive cells using dplyr function.
 
 ```{r}
 counts_filtered = 
@@ -170,11 +171,9 @@ counts_filtered
 ```
 
 
-
 ### Scaling
 
-
-
+As before, we can use standard Bioconductor utilities for calculating scaled log counts.
 
 ```{r}
 #--- normalization ---#
@@ -196,7 +195,7 @@ counts_scaled %>%
 
 ### Detect variable gene-transcripts
 
-为了减轻下游分析工具的计算负担，减少数据中的噪声，我们需要先进行特征选择。
+As before, we can use standard Bioconductor utilities to identify variable genes.
 
 ```{r}
 #--- variance-modelling ---#
@@ -207,8 +206,7 @@ top_variable <- getTopHVGs(gene_variability, prop=0.1)
 
 ### Dimensionality reduction
 
-
-特征选择后，单细胞表达矩阵的维数可以通过专门的降维算法进一步降低。使得数据可以直观可视化，并且将数据简化为基本组成部分。
+As before, we can use standard Bioconductor utilities to calculate reduced dimensions.
 
 ```{r}
 #--- dimensionality-reduction ---#
@@ -224,6 +222,7 @@ counts_reduction
 
 ## Clustering
 
+We use mutate function from dplyr to attach the cluster label to the existing dataset.
 
 ```{r}
 counts_cluster <-
@@ -240,11 +239,10 @@ counts_cluster
 
 ```
 
-使用tSNE对聚类进行可视化。
+We can customise the tSNE plot plotting with ggplot.
 
 ```{r}
 plotTSNE(counts_cluster, colour_by="cluster",text_by="cluster")
-
 
 counts_cluster %>%
   ggplot(aes(

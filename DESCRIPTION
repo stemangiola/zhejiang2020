@@ -59,7 +59,8 @@ Imports:
     celldex,
     gplots,
     RNAseq123,
-    ggbeeswarm
+    ggbeeswarm,
+    uwot
 Suggests:
     knitr,
     rmarkdown,

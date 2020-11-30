@@ -52,7 +52,7 @@ library(ggplot2)
 # tidyverse-friendly packages
 library(plotly)
 library(ggrepel)
-library(GGally)
+
 #library(tidyHeatmap)
 library(tidybulk)
 ```

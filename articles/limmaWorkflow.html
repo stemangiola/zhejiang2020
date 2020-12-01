@@ -412,9 +412,9 @@ Example data: Boxplots of log-CPM values showing expression distributions for un
 </p>
 </div>
 </div>
-<div id="unsupervised-clustering-of-samples" class="section level2">
+<div id="dimensionality-reduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#unsupervised-clustering-of-samples" class="anchor"></a>Unsupervised clustering of samples</h2>
+<a href="#dimensionality-reduction" class="anchor"></a>Dimensionality reduction</h2>
 <p>In our opinion, one of the most important exploratory plots to examine for gene expression analyses is the multi-dimensional scaling (MDS) plot, or similar. The plot shows similarities and dissimilarities between samples in an unsupervised manner so that one can have an idea of the extent to which differential expression can be detected before carrying out formal tests. Ideally, samples would cluster well within the primary condition of interest, and any sample straying far from its group could be identified and followed up for sources of error or extra variation. If present, technical replicates should lie very close to one another.</p>
 <p>Such a plot can be made in <strong>limma</strong> using the <code>plotMDS</code> function. The first dimension represents the leading-fold-change that best separates samples and explains the largest proportion of variation in the data, with subsequent dimensions having a smaller effect and being orthogonal to the ones before it. When experimental design involves multiple factors, it is recommended that each factor is examined over several dimensions. If samples cluster by a given factor in any of these dimensions, it suggests that the factor contributes to expression differences and is worth including in the linear modelling. On the other hand, factors that show little or no effect may be left out of downstream analysis.</p>
 <p>In this dataset, samples can be seen to cluster well within experimental groups over dimension 1 and 2, and then separate by sequencing lane (sample batch) over dimension 3 (shown in the plot below). Keeping in mind that the first dimension explains the largest proportion of variation in the data, notice that the range of values over the dimensions become smaller as we move to higher dimensions.</p>

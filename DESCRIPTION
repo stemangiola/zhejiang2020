@@ -1,6 +1,6 @@
 Package: zhejiang2020
 Title: Introduction to Tidy Transcriptomics
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(
     person("Xueyi", "Dong", email="dong.x@wehi.edu.au",
     role = c("aut")),

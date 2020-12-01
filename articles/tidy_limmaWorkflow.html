@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zhejiang2020</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -126,7 +126,7 @@
 
     
     
-<p><img src="../inst/vignettes/tidybulk_logo.png" width="100px"></p>
+<p><img src="tidybulk_logo.png" width="400"></p>
 <div id="abstract" class="section level1">
 <h1 class="hasAnchor">
 <a href="#abstract" class="anchor"></a>Abstract</h1>
@@ -331,7 +331,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">label</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="va">custom_theme</span></code></pre></div>
-<p><img src="tidy_limmaWorkflow_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="tidy_limmaWorkflow_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>We can reproduce the log-transcript-abundance density of unscaled and scaled data (seen in the previous session of the workshop) using tidyverse tools</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts_scaled</span> <span class="op">%&gt;%</span>
@@ -346,7 +346,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">processing</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="va">custom_theme</span></code></pre></div>
-<p><img src="tidy_limmaWorkflow_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="tidy_limmaWorkflow_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <div id="dimensionality-reduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dimensionality-reduction" class="anchor"></a>Dimensionality reduction</h2>
@@ -441,7 +441,7 @@
   <span class="va">voom</span> <span class="op">%&gt;%</span> 
   <span class="fu">limma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">limma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Final model: Mean-variance trend"</span><span class="op">)</span></code></pre></div>
-<p><img src="tidy_limmaWorkflow_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="tidy_limmaWorkflow_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <div id="useful-graphical-representations-of-differential-expression-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#useful-graphical-representations-of-differential-expression-results" class="anchor"></a>Useful graphical representations of differential expression results</h2>
@@ -492,7 +492,7 @@
 ## other attached packages:
 ##  [1] tidybulk_1.2.0     ggrepel_0.8.2      plotly_4.9.2.1     ggplot2_3.3.2     
 ##  [5] magrittr_2.0.1     readr_1.4.0        tidyr_1.1.2        dplyr_1.0.2       
-##  [9] tibble_3.0.4       zhejiang2020_0.3.1 BiocStyle_2.18.1  
+##  [9] tibble_3.0.4       zhejiang2020_0.3.2 BiocStyle_2.18.1  
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] bitops_1.0-6                matrixStats_0.57.0          fs_1.5.0                   

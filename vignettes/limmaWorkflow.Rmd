@@ -260,7 +260,7 @@ boxplot(lcpm, las=2, col=col, main="")
 title(main="B. Example: Normalised data",ylab="Log-cpm")
 ```
 
-## Unsupervised clustering of samples
+## Dimensionality reduction
 
 In our opinion, one of the most important exploratory plots to examine for gene expression analyses is the multi-dimensional scaling (MDS) plot, or similar. The plot shows similarities and dissimilarities between samples in an unsupervised manner so that one can have an idea of the extent to which differential expression can be detected before carrying out formal tests. Ideally, samples would cluster well within the primary condition of interest, and any sample straying far from its group could be identified and followed up for sources of error or extra variation. If present, technical replicates should lie very close to one another. 
 

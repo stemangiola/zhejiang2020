@@ -16,9 +16,7 @@ output:
     fig_caption: true
 ---
 
-```{r, echo=FALSE, out.width = "100px"}
-knitr::include_graphics("../inst/vignettes/tidybulk_logo.png")
-```
+![](tidybulk_logo.png){width=400px}
 
 
 ## Introduction

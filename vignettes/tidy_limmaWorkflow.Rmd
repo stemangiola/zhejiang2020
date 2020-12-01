@@ -21,9 +21,9 @@ options(digits=3)
 options(width=90)
 ```
 
-```{r, echo=FALSE, out.width = "100px"}
-knitr::include_graphics("../inst/vignettes/tidybulk_logo.png")
-```
+![](tidybulk_logo.png){width=400px}
+
+
 
 # Abstract
 

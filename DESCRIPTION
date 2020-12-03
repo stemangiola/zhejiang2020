@@ -61,7 +61,6 @@ Imports:
     gplots,
     RNAseq123,
     ggbeeswarm,
-
     uwot
 Suggests:
     knitr,

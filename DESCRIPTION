@@ -53,6 +53,7 @@ Imports:
     EnsDb.Hsapiens.v86,
     RColorBrewer,
     pheatmap,
+    batchelor,
     TENxPBMCData,
     Rtsne,
     igraph,
@@ -60,6 +61,7 @@ Imports:
     gplots,
     RNAseq123,
     ggbeeswarm,
+
     uwot
 Suggests:
     knitr,

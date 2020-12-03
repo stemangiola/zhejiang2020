@@ -53,11 +53,10 @@ The following R/Bioconductor packages will be explicitly used:
 
 ```{r}
 #--- loading ---#
-R.utils::gunzip(system.file("extdata", "pbmc4k_raw_gene_bc_matrices.tar.gz", package = "zhejiang2020"),destname ="./pbmc4k.tar")
-utils::untar("pbmc4k.tar",exdir = ".")
+R.utils::unzip(system.file("extdata", "pbmc4k.zip", package = "zhejiang2020"),exdir = ".")
 
 library(DropletUtils)
-fname <- "raw_gene_bc_matrices/GRCh38"
+fname <- "pbmc4k"
 sce.pbmc <- read10xCounts(fname, col.names=TRUE)
 ```
 
@@ -318,3 +317,162 @@ pheatmap(log2(tab+10), color=colorRampPalette(c("white", "blue"))(101))
 ```
 
 
+# 数据整合
+
+这里我们使用`MNN`算法整合多个数据并消除批次效应（batch effects）
+
+首先对两个PBMC单细胞数据集进行预处理
+
+```{r}
+#--- loading ---#
+library(TENxPBMCData)
+pbmc4k <- TENxPBMCData('pbmc4k')
+
+#--- quality-control ---#
+is.mito <- grep("MT", rowData(pbmc4k)$Symbol_TENx)
+
+library(scater)
+stats <- perCellQCMetrics(pbmc4k, subsets=list(Mito=is.mito))
+high.mito <- isOutlier(stats$subsets_Mito_percent, type="higher")
+pbmc4k <- pbmc4k[,!high.mito]
+
+#--- normalization ---#
+pbmc4k <- logNormCounts(pbmc4k)
+
+#--- variance-modelling ---#
+library(scran)
+dec4k <- modelGeneVar(pbmc4k)
+chosen.hvgs <- getTopHVGs(dec4k, prop=0.1)
+
+#--- dimensionality-reduction ---#
+set.seed(10000)
+pbmc4k <- runPCA(pbmc4k, subset_row=chosen.hvgs, ncomponents=25,
+    BSPARAM=BiocSingular::RandomParam())
+
+set.seed(100000)
+pbmc4k <- runTSNE(pbmc4k, dimred="PCA")
+
+set.seed(1000000)
+pbmc4k <- runUMAP(pbmc4k, dimred="PCA")
+
+#--- clustering ---#
+g <- buildSNNGraph(pbmc4k, k=10, use.dimred = 'PCA')
+clust <- igraph::cluster_walktrap(g)$membership
+pbmc4k$cluster <- factor(clust)
+```
+
+
+```{r}
+#--- loading ---#
+library(TENxPBMCData)
+pbmc3k <- TENxPBMCData('pbmc3k')
+
+#--- quality-control ---#
+is.mito <- grep("MT", rowData(pbmc3k)$Symbol_TENx)
+
+library(scater)
+stats <- perCellQCMetrics(pbmc3k, subsets=list(Mito=is.mito))
+high.mito <- isOutlier(stats$subsets_Mito_percent, type="higher")
+pbmc3k <- pbmc3k[,!high.mito]
+
+#--- normalization ---#
+pbmc3k <- logNormCounts(pbmc3k)
+
+#--- variance-modelling ---#
+library(scran)
+dec3k <- modelGeneVar(pbmc3k)
+chosen.hvgs <- getTopHVGs(dec3k, prop=0.1)
+
+#--- dimensionality-reduction ---#
+set.seed(10000)
+pbmc3k <- runPCA(pbmc3k, subset_row=chosen.hvgs, ncomponents=25,
+    BSPARAM=BiocSingular::RandomParam())
+
+set.seed(100000)
+pbmc3k <- runTSNE(pbmc3k, dimred="PCA")
+
+set.seed(1000000)
+pbmc3k <- runUMAP(pbmc3k, dimred="PCA")
+
+#--- clustering ---#
+g <- buildSNNGraph(pbmc3k, k=10, use.dimred = 'PCA')
+clust <- igraph::cluster_louvain(g)$membership
+pbmc3k$cluster <- factor(clust)
+```
+
+由于两个数据集所表达的基因不尽相同，我们取两个数据集表达基因的交集并且过滤掉不同的基因，以保证两个数据集的每一行都是一样的基因。
+
+```{r}
+universe <- intersect(rownames(pbmc3k), rownames(pbmc4k))
+length(universe)
+```
+
+```{r}
+# Subsetting the SingleCellExperiment object.
+pbmc3k <- pbmc3k[universe,]
+pbmc4k <- pbmc4k[universe,]
+
+# Also subsetting the variance modelling results, for convenience.
+dec3k <- dec3k[universe,]
+dec4k <- dec4k[universe,]
+```
+
+
+
+```{r}
+combined.dec <- combineVar(dec3k, dec4k)
+chosen.hvgs <- combined.dec$bio > 0
+sum(chosen.hvgs)
+```
+
+```{r}
+library(batchelor)
+rescaled <- multiBatchNorm(pbmc3k, pbmc4k)
+pbmc3k <- rescaled[[1]]
+pbmc4k <- rescaled[[2]]
+```
+
+
+```{r}
+# Synchronizing the metadata for cbind()ing.
+rowData(pbmc3k) <- rowData(pbmc4k)
+colData(pbmc3k) = colData(pbmc3k)[,colnames(colData(pbmc4k))]
+pbmc3k$batch <- "3k"
+pbmc4k$batch <- "4k"
+uncorrected <- cbind(pbmc3k,pbmc4k)
+
+# Using RandomParam() as it is more efficient for file-backed matrices.
+library(scater)
+uncorrected <- runPCA(uncorrected, subset_row=chosen.hvgs,
+    BSPARAM=BiocSingular::RandomParam())
+```
+
+
+```{r}
+uncorrected <- runTSNE(uncorrected, dimred="PCA")
+plotTSNE(uncorrected, colour_by="batch")
+```
+
+
+```{r}
+# Using randomized SVD here, as this is faster than 
+# irlba for file-backed matrices.
+mnn.out <- fastMNN(pbmc3k, pbmc4k, d=50, k=20, subset.row=chosen.hvgs,
+    BSPARAM=BiocSingular::RandomParam(deferred=TRUE))
+mnn.out
+```
+
+
+```{r}
+library(scater)
+mnn.out <- runTSNE(mnn.out, dimred="corrected")
+
+mnn.out$batch <- factor(mnn.out$batch)
+plotTSNE(mnn.out, colour_by="batch")
+```
+
+```{r}
+ggplot()+
+  geom_point(alpha=0.5,size=0.5,aes(x=reducedDim(mnn.out,"TSNE")[,1],y=reducedDim(mnn.out,"TSNE")[,2],col=mnn.out$batch))+
+  theme_bw()
+```

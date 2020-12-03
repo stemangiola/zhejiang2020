@@ -53,7 +53,7 @@ The following R/Bioconductor packages will be explicitly used:
 
 ```{r}
 #--- loading ---#
-R.utils::unzip(system.file("extdata", "pbmc4k.zip", package = "zhejiang2020"),exdir = ".")
+unzip(system.file("extdata", "pbmc4k.zip", package = "zhejiang2020"),exdir = ".")
 
 library(DropletUtils)
 fname <- "pbmc4k"

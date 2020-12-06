@@ -21,7 +21,7 @@ options(digits=3)
 options(width=90)
 ```
 
-![](tidybulk_logo.png){width=400px}
+![](tidybulk_logo.png){width=100px}
 
 
 

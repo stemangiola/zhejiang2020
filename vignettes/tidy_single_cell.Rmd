@@ -16,7 +16,7 @@ output:
     fig_caption: true
 ---
 
-![](tidybulk_logo.png){width=400px}
+![](tidybulk_logo.png){width=100px}
 
 
 ## Introduction

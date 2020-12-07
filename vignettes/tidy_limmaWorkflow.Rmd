@@ -197,7 +197,7 @@ counts_scaled %>%
 
 As previously shown, we can perform dimensionality reduction to further explore our data. The `reduce_dimensions` function, will perform calculations only on highly-transcribed genes (i.e. .abundant == TRUE) 
 
-```{r MDS1"}
+```{r}
 counts_scaled %>%
   reduce_dimensions(method = "MDS", action="get") %>%
   
@@ -251,7 +251,7 @@ counts_test %>%
 
 With `ggplot2` we We can reproduce and customise the plot for the association between fold-change and average log-abundance
 
-```{r MDplot, fig.keep='none'}
+```{r, fig.keep='none'}
 counts_test %>%
   
   filter(.abundant) %>%

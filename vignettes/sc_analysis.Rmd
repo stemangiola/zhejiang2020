@@ -1,11 +1,11 @@
 ---
-title: "10X 单细胞测序数据分析"
+title: "10X Single cell sequencing data analysis - Chinese"
 output: rmarkdown::html_vignette
 author: 
   - name: Yue You
   - name: Luyi Tian
 vignette: >
-  %\VignetteIndexEntry{10X 单细胞测序数据分析}
+  %\VignetteIndexEntry{10X Single cell sequencing data analysis - Chinese}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

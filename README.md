@@ -27,32 +27,26 @@ More details on the workshop are below.
 
 This is necessary in order to reproduce the code shown in the workshop. The workshop is designed for R `4.0` and can be installed using one of the two ways below.
 
-### Via Docker image
-
-If you're familiar with [Docker](https://docs.docker.com/get-docker/) you could use the Docker image which has all the software pre-configured to the correct versions.
-
-```
-docker run -e PASSWORD=abc -p 8787:8787 stemangiola/zhejiang2020:zhejiang2020
-```
-
-Once running, navigate to <http://localhost:8787/> and then login with
-`Username:rstudio` and `Password:abc`.
-
-You should see the Rmarkdown file with all the workshop code which you can run.
-
 ### Via GitHub
 
-Alternatively, you could install the workshop using the commands below in R `4.0`.
+You can install the workshop using the commands below in R `4.0`.
 
 ```
 # Install dependency manually
-(to be completed)
 
-# Install workshop package
-remotes::install_github("stemangiola/zhejiang2020", build_vignettes = TRUE)
+# Open R
+Open R 4.0 or newer
 
-# To view vignettes
+# Install devtools if you do not have it
+install.packages("devtools")
+
+# Install the workshop package from Github
+devtools::install_github("stemangiola/zhejiang2020", build_vignettes = TRUE)
+
+# Load the workshop
 library(zhejiang2020)
+
+# List the vignettes, present in the vignettes directory
 browseVignettes("zhejiang2020")
 ```
 
